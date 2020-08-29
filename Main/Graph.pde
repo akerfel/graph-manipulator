@@ -2,11 +2,11 @@ import java.util.HashSet;
 
 public class Graph {
     HashMap<Integer, Node> nodes;
-    HashMap<Integer, Integer> edges;
+    ArrayList<Edge> edges;
     
     Graph() {
         nodes = new HashMap<Integer, Node>();    
-        edges = new HashMap<Integer, Integer>();
+        edges = new ArrayList<Edge>();
     }
     
     void addNode(int id, int x, int y) {
@@ -15,7 +15,7 @@ public class Graph {
     
     void addEdge(int id1, int id2) {
         if (nodes.keySet().contains(id1) && nodes.keySet().contains(id2)) {
-            edges.put(id1, id2);
+            edges.add(new Edge(id1, id2));
         }
     }
     

@@ -12,7 +12,7 @@ void setup() {
 }
 
 void draw() {
-    background(0);
+    background(150);
     drawGraph();
 }
 
@@ -26,9 +26,11 @@ void mousePressed() {
             if (dist(mouseX, mouseY, node.x, node.y) <= nodeRadius) {
                 if (focusedNode != null) {
                     graph.addEdge(node.id, focusedNode.id);
+                    focusedNode.inFocus = false;
                     focusedNode = null;
                 }
                 else {
+                    node.inFocus = true;
                     focusedNode = node;
                 }
             }
@@ -42,8 +44,8 @@ void drawGraph() {
 }
 
 void drawEdges() {
-    for (int id1 : graph.edges.keySet()) {
-        drawEdge(id1, graph.edges.get(id1));
+    for (Edge edge : graph.edges) {
+        drawEdge(edge);
     }    
 }
 
@@ -55,7 +57,12 @@ void drawNodes() {
 
 void drawNode(Node node) {
     stroke(0);
-    fill(255);
+    if (node.inFocus) {
+        fill(175,238,238);
+    }
+    else {
+        fill(255);
+    }
     circle(node.x, node.y, nodeRadius);  
     fill(0);
     textSize(20);
@@ -63,9 +70,9 @@ void drawNode(Node node) {
     text(node.id, node.x, node.y);
 }
 
-void drawEdge(int id1, int id2) {
+void drawEdge(Edge edge) {
     stroke(255);
-    Node node1 = graph.getNode(id1);
-    Node node2 = graph.getNode(id2);
+    Node node1 = graph.getNode(edge.id1);
+    Node node2 = graph.getNode(edge.id2);
     line(node1.x, node1.y, node2.x, node2.y);
 }
