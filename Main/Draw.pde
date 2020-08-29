@@ -27,11 +27,9 @@ void drawNodes() {
 void drawNode(Node node) {
     stroke(0);
     if (node == focusedNode) {
-        fill(175,238,238);
+        circle(node.x, node.y, nodeRadius * 2.5);  
     }
-    else {
-        fill(255);
-    }
+    fill(node.c);
     circle(node.x, node.y, nodeRadius * 2);  
     fill(0);
     textSize(20);
