@@ -2,6 +2,7 @@ Graph graph;
 int counter;
 int nodeRadius;
 Node focusedNode;
+Node grabbedNode;
 
 void setup() {
     size(800, 800);
@@ -13,15 +14,23 @@ void setup() {
 
 void draw() {
     background(150);
+    moveGrabbedNode();
     drawHelpText();
     drawGraph();
+}
+
+void moveGrabbedNode() {
+    if (grabbedNode != null) {
+        grabbedNode.x = mouseX;
+        grabbedNode.y = mouseY;
+    }
 }
 
 void drawHelpText() {
     textAlign(CORNER, CORNER);
     fill(0);
     textSize(12);
-    text("x -> new node", 0, 10);    
+    text("press x -> new node", 0, 10);    
 }
 
 void keyPressed() {
@@ -31,19 +40,25 @@ void keyPressed() {
 }
 
 void createNode(int x, int y) {
-    for (Node node : graph.nodes.values()) {
-        if (dist(x, y, node.x, node.y) <= nodeRadius * 2) { // collision -> no node created
-            return;
-        }
-    }
     graph.addNode(counter, mouseX, mouseY);
     counter++;    
 }
 
+void mouseReleased() {
+    if (mouseButton == LEFT) {
+        grabbedNode = null;
+    }
+}
+
 void mousePressed() {
     if (mouseButton == LEFT) {
-        
+        for (Node node : graph.nodes.values()) {
+            if (dist(mouseX, mouseY, node.x, node.y) <= nodeRadius) {
+                grabbedNode = node;
+            }
+        }
     }
+    
     if (mouseButton == RIGHT) {
         for (Node node : graph.nodes.values()) {
             if (dist(mouseX, mouseY, node.x, node.y) <= nodeRadius) {
