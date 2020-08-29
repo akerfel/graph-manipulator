@@ -7,32 +7,50 @@ void setup() {
     size(800, 800);
     graph = new Graph();
     counter = 1;
-    nodeRadius = 40;
+    nodeRadius = 20;
     focusedNode = null;
 }
 
 void draw() {
     background(150);
+    drawHelpText();
     drawGraph();
 }
 
-void mousePressed() {
-    if (mouseButton == RIGHT) {
-        graph.addNode(counter, mouseX, mouseY);
-        counter++;
+void drawHelpText() {
+    textAlign(CORNER, CORNER);
+    fill(0);
+    textSize(12);
+    text("x -> new node", 0, 10);    
+}
+
+void keyPressed() {
+    if (key == 'x') {
+        createNode(int(mouseX), int(mouseY));
     }
+}
+
+void createNode(int x, int y) {
+    graph.addNode(counter, mouseX, mouseY);
+    counter++;    
+}
+
+void mousePressed() {
     if (mouseButton == LEFT) {
+        
+    }
+    if (mouseButton == RIGHT) {
         for (Node node : graph.nodes.values()) {
             if (dist(mouseX, mouseY, node.x, node.y) <= nodeRadius) {
+                println("hit");
                 if (focusedNode != null) {
                     graph.addEdge(node.id, focusedNode.id);
-                    focusedNode.inFocus = false;
                     focusedNode = null;
                 }
                 else {
-                    node.inFocus = true;
                     focusedNode = node;
                 }
+                break;
             }
         }
     }
@@ -57,13 +75,13 @@ void drawNodes() {
 
 void drawNode(Node node) {
     stroke(0);
-    if (node.inFocus) {
+    if (node == focusedNode) {
         fill(175,238,238);
     }
     else {
         fill(255);
     }
-    circle(node.x, node.y, nodeRadius);  
+    circle(node.x, node.y, nodeRadius * 2);  
     fill(0);
     textSize(20);
     textAlign(CENTER, CENTER);
