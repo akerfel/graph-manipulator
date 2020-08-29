@@ -31,6 +31,11 @@ void keyPressed() {
 }
 
 void createNode(int x, int y) {
+    for (Node node : graph.nodes.values()) {
+        if (dist(x, y, node.x, node.y) <= nodeRadius * 2) { // collision -> no node created
+            return;
+        }
+    }
     graph.addNode(counter, mouseX, mouseY);
     counter++;    
 }
