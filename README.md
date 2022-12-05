@@ -1,4 +1,4 @@
-# graphs-processing!
+# graphs-processing
 
 A program made for creating and manipulating graphs.
 
