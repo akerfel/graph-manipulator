@@ -2,4 +2,4 @@
 
 A program made for creating and manipulating graphs.
 
-![java_iWTyQ1xHHV](https://gits-15.sys.kth.se/storage/user/7786/files/bb066779-3867-494b-9195-25bd018725bf)
+![java_iWTyQ1xHHV](https://user-images.githubusercontent.com/45148959/205667006-9417006a-b01e-455f-b4f3-5c098bac2e5e.png)
