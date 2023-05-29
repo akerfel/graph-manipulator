@@ -3,7 +3,7 @@ public class Node {
     public int y;
     public int id;
     public color c;
-    
+
     Node(int id, int x, int y) {
         this.id = id;
         this.x = x;

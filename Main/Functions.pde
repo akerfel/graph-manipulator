@@ -7,5 +7,5 @@ void moveGrabbedNode() {
 
 void createNode(int x, int y) {
     graph.addNode(counter, x, y);
-    counter++;    
+    counter++;
 }

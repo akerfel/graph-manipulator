@@ -18,15 +18,14 @@ void mousePressed() {
             }
         }
     }
-    
+
     if (mouseButton == RIGHT) {
         for (Node node : graph.nodes.values()) {
             if (dist(mouseX, mouseY, node.x, node.y) <= nodeRadius) {
                 if (focusedNode != null) {
                     graph.addEdge(node.id, focusedNode.id);
                     focusedNode = null;
-                }
-                else {
+                } else {
                     focusedNode = node;
                 }
                 break;
